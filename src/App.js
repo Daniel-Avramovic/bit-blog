@@ -6,6 +6,7 @@ import Authors from "./app/authors/Authors";
 import Footer from "./app/footer/Footer";
 import Header from "./app/header/Header";
 import Home from "./app/home/Home";
+import SingleAuthor from "./app/singleAuthor/SingleAuthor";
 import SinglePost from "./app/singlePost/SinglePost";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path={"/authors/"} component={Authors} />
           <Route path={"/about"} component={About} />
           <Route path={"/post/:id"} component={SinglePost} />
+          <Route path={"/users/:id"} component={SingleAuthor} />
         </Switch>
         <Footer/>
       </Fragment>
