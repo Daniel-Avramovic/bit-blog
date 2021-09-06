@@ -1,35 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Post } from '../../entities/post';
-import './home.css'
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { getPosts } from "../../services/getPosts";
+import "./home.css";
 const Home = () => {
-    const [posts, setPosts] = useState([]);
-    useEffect(()=>{
-        let result = []
-        const url = 'https://jsonplaceholder.typicode.com/posts'
-        fetch(url).then(response => response.json()).then(data => {
-            data.forEach(res => {
-                result.push(new Post(res.id, res.userId, res.title, res.body))
-            })
-            setPosts(result);
-        })
-    }, [])
+  const [posts, setPosts] = useState([]);
 
-    return(
-        <main className="container">
-            <h1 className="text-center">Posts</h1>
-            <ul>
-                {posts.map((post, index) => {
-                    return(
-                        <li key={index}>
-                            <Link to={`/post/${post.id}`}><h5>{post.title}</h5></Link>
-                            <p>{post.body}</p>
-                        </li>
-                    )
-                })}
-            </ul>
-        </main>
-    )
-}
+  
+    const allPosts = async () => {
+      const newPosts = await getPosts();
+      console.log(newPosts)
+      setPosts(newPosts);
+    };
+    
+ 
+    useEffect(() => { allPosts() }, [])
+    
+  return (
+    <main className="container">
+      <h1 className="text-center">Posts</h1>
+      <ul>
+        {posts.map((post, index) => {
+          return (
+            <li key={index}>
+              <Link to={`/post/${post.id}`}>
+                <h5>{post.title}</h5>
+              </Link>
+              <p>{post.body}</p>
+            </li>
+          );
+        })}
+      </ul>
+    </main>
+  );
+};
 
 export default Home;
