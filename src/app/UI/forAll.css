@@ -1,0 +1,16 @@
+.first{
+    display: flex;
+    border-bottom: 1px solid black;
+}
+.second{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+img{
+    width: 250px;
+}
+
+a {
+    color: blue;
+}
