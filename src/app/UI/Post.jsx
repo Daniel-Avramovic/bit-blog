@@ -6,14 +6,14 @@ const Post = ({post, author, samePost}) => {
         <main className="container">
         <Link to={'/'}>{`< back`}</Link>
         <h3 className="text-center">{post.title}</h3>
-        <Link><h5 className="text-center">{author.name}</h5></Link>
+        <Link to={`/users/${author.id}`}><h5 className="text-center">{author.name}</h5></Link>
         <p>{post.body}</p><hr />
         <h4>{samePost.length} more posts from same author</h4>
         <ul>
-            {samePost.map(post => {
+            {samePost.map((post, index) => {
                 return(
-                    <li>
-                        <Link>{post.title}</Link>
+                    <li key={index}>
+                        <Link to={`/post/${post.id}`}>{post.title}</Link>
                     </li>
                 )
             })}
